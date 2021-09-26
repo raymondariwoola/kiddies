@@ -1,0 +1,74 @@
+<%- include('partials/header') %>
+
+    <h1>
+        Welcome to Kiddies
+    </h1>
+
+    <!-- This is for navigation and settings -->
+    <nav>
+
+
+    </nav>
+
+
+    <!-- This section is for Alphabets -->
+    <section class="alphabets">
+
+        <div class="uppercase">
+
+        </div>
+
+        <div class="lowercase">
+
+        </div>
+
+        <div class="keyboardAphabets">
+
+        </div>
+    </section>
+
+
+    <!-- This section is for Numbers -->
+    <section class="numbers">
+
+        <div class="first10 animate__animated animate__bounce">
+            <% alpha.forEach(a=> { %>
+                <span class="alpha">
+                    <%= a %>
+                </span>
+                <% }) %>
+        </div>
+
+        <div class="first50">
+
+        </div>
+
+        <div class="numberRange">
+
+        </div>
+
+    </section>
+
+
+    <!-- This section is for Shapes -->
+    <section class="shapes">
+
+        <div class="easy-shapes">
+
+        </div>
+
+        <div class="complex-shapes">
+
+        </div>
+
+    </section>
+
+
+    <!-- This section is for Colors -->
+    <section class="colors">
+
+    </section>
+
+
+
+    <%- include('partials/footer') %>
