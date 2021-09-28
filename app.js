@@ -28,12 +28,16 @@ for (let i = 97; i <= 122; i++) {
 
 
 
-app.get("/", (req, res) => {
 
+app.get("/", (req, res) => {
     res.render("home", { alpha: alphabetsUpper });
 });
 
+var type = "uppercase";
 
+app.get("/alphabets", (req, res) => {
+  res.render("alphabets", {type: type})
+});
 
 
 app.listen(3000, function () {
