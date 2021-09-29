@@ -8,61 +8,61 @@ const alphabetsUpper =  ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
 
 const alphabetsLower = alphabetsUpper.map((a) => a.toLowerCase());
 
-const applaud = new Audio("audio/applause-2.mp3");
+const applaud = new Audio("../audio/applause-2.mp3");
 var _alphabet;
 let iteration = 0;
 let trackAlpha = 0;
 let alphabets;
+let currentClass;
+let alphabetContainer;
+let animateOnPage;
+
 function randomNum(maxValue) {
-  // if maxValue is defined then return random based on maxValue else set maxValue as 10
+  // if maxValue is defined then return random number based on maxValue else set maxValue as 10
   return Math.floor(Math.random() * (maxValue ? maxValue : 10));
 }
 
-function initText(alphaType) {
-
-  if (alphaType === "uppercase") {
-    alphabets = alphabetsUpper[trackAlpha];
-  } else {
-    alphabets = alphabetsLower[trackAlpha];
-  }
-
-  console.log(alphabets);
-
+function initText() {
+currentClass = animations[randomNum(animations.length)];
+  alpType === "uppercase" ? alphabets = alphabetsUpper[trackAlpha] : alphabets = alphabetsLower[trackAlpha];
   document.querySelector(
     ".alphabox"
-  ).innerHTML = `<center><h1 class="animate animate-alpha ${
-    animations[randomNum(animations.length)]
-  }" id="alphabet">${alphabets}</h1> </center>`; // Assign the first Alphabet
-  _alphabet = document.querySelector("#alphabet").innerText; // get the value if current alphabets
-  document.querySelector("#alphabet").style.color =
-    colors[randomNum(colors.length)];
+  ).innerHTML = `<h1 class="animate animate-alpha ${currentClass}" id="alphabet">${alphabets}</h1>`; // Assign the first Alphabet
+  alphabetContainer = document.querySelector("#alphabet");
+  _alphabet = alphabetContainer.innerText; // get the value if current alphabets
+  alphabetContainer.style.color = colors[randomNum(colors.length)];
 }
 
-document.addEventListener("animationend", () => {
-  console.log("Done")
-  trackAlpha < 26 ? trackAlpha++ : trackAlpha = 0;
-  trackAlpha < 26 ? initText() : animEnd();
-});
 
-document.addEventListener("animationstart", () => {
-  // trackAlpha < 26 ? play() : null;
-  console.log("Start");
-});
 
-document.addEventListener("animationiteration", () => {
-  document.querySelector("#alphabet").style.color =  colors[randomNum(colors.length)];
-  // play();
-});
+function addAnimationEventListener() {
+  document.addEventListener("animationend", () => {
+    trackAlpha < 26 ? trackAlpha++ : (trackAlpha = 0);
+    trackAlpha < 26 ? initText() : animEnd();
+  });
 
+  document.addEventListener("animationstart", () => {
+    trackAlpha < 26 ? speak() : null;
+  });
+
+  document.addEventListener("animationiteration", () => {
+    alphabetContainer.style.color = colors[randomNum(colors.length)];
+    speak();
+  });
+}
 
 function animEnd() {
-  document.querySelector(".alphabox").innerHTML =`<h1 class="animate animate-alpha gjob">GOOD JOB!</h1>`;
+  document.querySelector(".alphabox").innerHTML =`<h1 class="animate animate-alpha gjob">GOOD JOB!</h1> <small> Tap anywhere to restart </small>`;
   _alphabet = document.querySelector(".gjob").innerText;
   applaud.play();
-  // play();
+  speak();
+  document.addEventListener("click",() => location.reload());
 }
 
 
+/* ******************************** */
+//! Do not modify the contents below.
+/* ******************************** */
 function populateVoiceList() {
   voices = synth.getVoices().sort(function (a, b) {
     const aname = a.name.toUpperCase(),
@@ -100,17 +100,26 @@ function speak() {
   }
 }
 
+/* ******************************** */
+//! Do not modify the contents above.
+/* ******************************** */
+
+
 function play() {
-  speak();
+  // speak();
   // inputTxt.blur();
 }
 
 function nextAlphabet(type) {
-
   // alert('Next alphabet');
 }
 
 document.addEventListener('DOMContentLoaded',(e) => {
-  // initText(alpType);  
+  window.location.pathname === "/alphabets-menu/alphabets" ? initText() : null;
+  window.location.pathname === "/alphabets-menu/alphabets"
+    ? console.log(window.location.pathname)
+    : console.log(window.location.pathname);
+  window.location.pathname === "/alphabets-menu/alphabets" ? addAnimationEventListener() : null;
+  animateOnPage = window.location.pathname === "/alphabets-menu/alphabets" ? true : false;
 })
 

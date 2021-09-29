@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 // const testFunc = require("./custom.js");
 
 const app = express();
-app.use(express.static("public"));
+app.use(express.static("public/"));
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: true }));
 
@@ -33,11 +33,33 @@ app.get("/", (req, res) => {
     res.render("home", { alpha: alphabetsUpper });
 });
 
-var type = "uppercase";
+let type;
 
-app.get("/alphabets", (req, res) => {
-  res.render("alphabets", {type: type})
+app.get("/alphabets-menu", (req, res) => {
+  res.render("alphabets-menu");
 });
+
+app.post("/alphabets-menu", (req, res) => {
+   type = req.body.upperCase ? "uppercase" 
+  : req.body.lowerCase ? "lowercase"
+  : null
+  res.redirect("/alphabets-menu/alphabets");
+});
+
+app.get("/alphabets-menu/alphabets", (req, res) => {
+  type === undefined
+    ? res.redirect("/alphabets-menu")
+    : res.render("alphabets", { type: type });
+});
+
+// app.get('/alphabets-menu/alphabets', function (req, res, next) {
+//   console.log('the response will be sent by the next function ...')
+//   next()
+// }, function (req, res) {
+//  type === undefined
+//     ? res.redirect("/alphabets-menu")
+//     : res.render("alphabets", { type: type });
+// })
 
 
 app.listen(3000, function () {
