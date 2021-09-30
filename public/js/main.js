@@ -205,6 +205,7 @@ function assignListener() {
       const word = this.innerText.split('\n')[0];
       _alphabet = word;
       speak();
+      //! Check bgChnageOnHover(this, word, false)
     });
   });
   cards.forEach(card => {
@@ -213,6 +214,15 @@ function assignListener() {
     });
   });
 }
+
+
+//!check function bgChnageOnHover(cardTag, x, clearBg) {
+//   x === "Alphabets" ? cardTag.style.backgroundImage = "../images/bg/alphabets-bg.png" : null;
+//   console.log(cardTag)
+//   console.log(x)
+//   console.log(clearBg)
+// }
+
 
 
 $(document).ready(() => {
