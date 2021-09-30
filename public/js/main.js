@@ -1,10 +1,80 @@
 var synth = window.speechSynthesis;
 var voices = [];
-const animations = ["animate-zoomIn","animate-backInLeft","animate-backInRight","animate-backInUp","animate-bounceInDown","animate-flip","animate-jackInTheBox","animate-swing","animate-zoomInRight","animate-zoomInLeft","animate-zoomInUp"];
+const animations = [
+  "animate-zoomIn",
+  "animate-backInLeft",
+  "animate-backInRight",
+  "animate-backInUp",
+  "animate-bounceInDown",
+  "animate-flip",
+  "animate-jackInTheBox",
+  "animate-swing",
+  "animate-zoomInRight",
+  "animate-zoomInLeft",
+  "animate-zoomInUp",
+];
 
-const colors = ["#5285ff",	"#ffd352",	"#8a52ff",	"#ff8f52",	"#ff52a6",	"#f1c232",	"#6aa84f",	"#45818e",	"#674ea7",	"#a64d79",	"#b4d600",	"#edcc4c",	"#f57e99",	"#c28bcc",	"#62d5c1",	"#b4d600",	"#edcc4c",	"#f57e99",	"#c28bcc",	"#62d5c1",	"#6699cc",	"#fff275",	"#ff8c42",	"#ff3c38",	"#a23e48",	"#ffd900",	"#0071ce",	"#ed40a9",	"#000000",	"#aaaaaa"];
+const colors = [
+  "#5285ff",
+  "#ffd352",
+  "#8a52ff",
+  "#ff8f52",
+  "#ff52a6",
+  "#f1c232",
+  "#6aa84f",
+  "#45818e",
+  "#674ea7",
+  "#a64d79",
+  "#b4d600",
+  "#edcc4c",
+  "#f57e99",
+  "#c28bcc",
+  "#62d5c1",
+  "#b4d600",
+  "#edcc4c",
+  "#f57e99",
+  "#c28bcc",
+  "#62d5c1",
+  "#6699cc",
+  "#fff275",
+  "#ff8c42",
+  "#ff3c38",
+  "#a23e48",
+  "#ffd900",
+  "#0071ce",
+  "#ed40a9",
+  "#000000",
+  "#aaaaaa",
+];
 
-const alphabetsUpper =  ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+const alphabetsUpper = [
+  "A",
+  "B",
+  "C",
+  "D",
+  "E",
+  "F",
+  "G",
+  "H",
+  "I",
+  "J",
+  "K",
+  "L",
+  "M",
+  "N",
+  "O",
+  "P",
+  "Q",
+  "R",
+  "S",
+  "T",
+  "U",
+  "V",
+  "W",
+  "X",
+  "Y",
+  "Z",
+];
 
 const alphabetsLower = alphabetsUpper.map((a) => a.toLowerCase());
 
@@ -23,8 +93,10 @@ function randomNum(maxValue) {
 }
 
 function initText() {
-currentClass = animations[randomNum(animations.length)];
-  alpType === "uppercase" ? alphabets = alphabetsUpper[trackAlpha] : alphabets = alphabetsLower[trackAlpha];
+  currentClass = animations[randomNum(animations.length)];
+  alpType === "uppercase" ?
+    (alphabets = alphabetsUpper[trackAlpha]) :
+    (alphabets = alphabetsLower[trackAlpha]);
   document.querySelector(
     ".alphabox"
   ).innerHTML = `<h1 class="animate animate-alpha ${currentClass}" id="alphabet">${alphabets}</h1>`; // Assign the first Alphabet
@@ -32,8 +104,6 @@ currentClass = animations[randomNum(animations.length)];
   _alphabet = alphabetContainer.innerText; // get the value if current alphabets
   alphabetContainer.style.color = colors[randomNum(colors.length)];
 }
-
-
 
 function addAnimationEventListener() {
   document.addEventListener("animationend", () => {
@@ -52,13 +122,14 @@ function addAnimationEventListener() {
 }
 
 function animEnd() {
-  document.querySelector(".alphabox").innerHTML =`<h1 class="animate animate-alpha gjob">GOOD JOB!</h1> <small> Tap anywhere to restart </small>`;
+  document.querySelector(
+    ".alphabox"
+  ).innerHTML = `<h1 class="animate animate-alpha gjob">GOOD JOB!</h1> <small> Tap anywhere to restart </small>`;
   _alphabet = document.querySelector(".gjob").innerText;
   applaud.play();
   speak();
-  document.addEventListener("click",() => location.reload());
+  document.addEventListener("click", () => location.reload());
 }
-
 
 /* ******************************** */
 //! Do not modify the contents below.
@@ -87,10 +158,12 @@ function speak() {
     var utterThis = new SpeechSynthesisUtterance(_alphabet);
     utterThis.onend = function (event) {
       console.log("SpeechSynthesisUtterance.onend");
-      nextAlphabet(); // calls function at the end of speech
+      // nextAlphabet(); // calls function at the end of speech
     };
     utterThis.onerror = function (event) {
+      //! check why this gives error when page is reloaded
       console.error("SpeechSynthesisUtterance.onerror");
+      console.error(event);
     };
 
     utterThis.voice = voices[10];
@@ -104,22 +177,61 @@ function speak() {
 //! Do not modify the contents above.
 /* ******************************** */
 
+// function play() {
+//   speak();
+//   // inputTxt.blur();
+// }
 
-function play() {
-  // speak();
-  // inputTxt.blur();
-}
+// function nextAlphabet(type) {
+//   // alert('Next alphabet');
+// }
 
-function nextAlphabet(type) {
-  // alert('Next alphabet');
-}
 
-document.addEventListener('DOMContentLoaded',(e) => {
+document.addEventListener("DOMContentLoaded", (e) => {
   window.location.pathname === "/alphabets-menu/alphabets" ? initText() : null;
-  window.location.pathname === "/alphabets-menu/alphabets"
-    ? console.log(window.location.pathname)
-    : console.log(window.location.pathname);
-  window.location.pathname === "/alphabets-menu/alphabets" ? addAnimationEventListener() : null;
-  animateOnPage = window.location.pathname === "/alphabets-menu/alphabets" ? true : false;
-})
+  window.location.pathname === "/alphabets-menu/alphabets" ?
+    addAnimationEventListener() :
+    null;
+  animateOnPage =
+    window.location.pathname === "/alphabets-menu/alphabets" ? true : false;
 
+});
+
+
+function assignListener() {
+  const cards = document.querySelectorAll('.card');
+  cards.forEach(card => {
+    card.addEventListener('mouseenter', function (e) {
+      const word = this.innerText.split('\n')[0];
+      _alphabet = word;
+      speak();
+    });
+  });
+  cards.forEach(card => {
+    card.addEventListener('mouseleave', function (e) {
+      synth.cancel();
+    });
+  });
+}
+
+
+$(document).ready(() => {
+  $("#proceed").click(() => {
+    assignListener()
+  })
+
+
+  var myModal = new bootstrap.Modal(document.getElementById('staticBackdrop'), {
+    keyboard: false
+  });
+
+myModal.toggle();
+
+});
+
+
+// Home Page navigation
+function getRoute(route) {
+  window.location.href = route;
+  return false;
+}

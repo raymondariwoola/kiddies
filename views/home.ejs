@@ -1,75 +1,268 @@
-<%- include('partials/header') %>
+<!DOCTYPE html>
+<html lang="en">
 
-    <h1>
-        Welcome to Kiddies
-    </h1>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiddies</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="main-body">
 
     <!-- This is for navigation and settings -->
-    <nav>
+    <nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light" id="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#">KIDDIES</a>
 
+            <ul class="navbar-nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Register</a>
+                </li>
+            </ul>
 
+            <ul class="navbar-nav nav justify-content-end">
+                <li class="nav-item">
+                    <div class="nav-link form-check form-switch">
+                        <form action="/home" method="post">
+                            <label class="form-check-label" for="day-night-switch">Night Mode</label>
+                            <input class="form-check-input" type="checkbox" id="day-night-switch">
+                        </form>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#auth">Settings</a>
+                </li>
+            </ul>
+
+        </div>
     </nav>
 
 
-    <!-- This section is for Alphabets -->
-    <section class="alphabets">
 
-        <div class="uppercase">
-
+    
+    
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"   aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Welcome</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="proceed">Close</button>
+                    <button type="button" class="btn btn-primary">Understood</button>
+                </div>
+            </div>
         </div>
-
-        <div class="lowercase">
-
-        </div>
-
-        <div class="keyboardAphabets">
-
-        </div>
-    </section>
+    </div>
 
 
-    <!-- This section is for Numbers -->
-    <section class="numbers">
-
-        <div class="first10 animate__animated animate__bounce">
-            <% alpha.forEach(a=> { %>
-                <span class="alpha">
-                    <%= a %>
-                </span>
-                <% }) %>
-        </div>
-
-        <div class="first50">
-
-        </div>
-
-        <div class="numberRange">
-
-        </div>
-
-    </section>
 
 
-    <!-- This section is for Shapes -->
-    <section class="shapes">
+    <h1 class="kiddies-h1">
+        Welcome to Kiddies
+    </h1>
+    <small> Click any card to begin </small>
 
-        <div class="easy-shapes">
+    <div class="container">
+        <section class="learning-section">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col" onclick="getRoute('/alphabets-menu');">
+                    <div class="card h-100 animate animate-appear delay-p5s" id="alphabetsCard">
+                        <!-- <img src="..." class="card-img-top" alt="..."> -->
+                        <div class="card-body">
+                            <h5 class="card-title">Alphabets</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt
+                                eros
+                                ipsum, at tempor enim vestibulum eget.
+                                Pellentesque tristique dolor eu porttitor interdum.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 animate animate-appear delay-p7s">
+                        <!-- <img src="..." class="card-img-top" alt="..."> -->
+                        <div class="card-body">
+                            <h5 class="card-title">Numbers</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt
+                                eros
+                                ipsum, at tempor enim vestibulum eget.
+                                Pellentesque tristique dolor eu porttitor interdum.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 animate animate-appear">
+                        <!-- <img src="..." class="card-img-top" alt="..."> -->
+                        <div class="card-body">
+                            <h5 class="card-title">Shapes</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt
+                                eros
+                                ipsum, at tempor enim vestibulum eget.
+                                Pellentesque tristique dolor eu porttitor interdum.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 animate animate-appear delay-p5s">
+                        <!-- <img src="..." class="card-img-top" alt="..."> -->
+                        <div class="card-body">
+                            <h5 class="card-title">Colors</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt
+                                eros
+                                ipsum, at tempor enim vestibulum eget.
+                                Pellentesque tristique dolor eu porttitor interdum.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 animate animate-appear delay-p7s">
+                        <!-- <img src="..." class="card-img-top" alt="..."> -->
+                        <div class="card-body">
+                            <h5 class="card-title">Animals</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt
+                                eros
+                                ipsum, at
+                                tempor enim vestibulum eget.
+                                Pellentesque tristique dolor eu porttitor interdum.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 animate animate-appear">
+                        <!-- <img src="..." class="card-img-top" alt="..."> -->
+                        <div class="card-body">
+                            <h5 class="card-title">Fruits</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt
+                                eros
+                                ipsum, at
+                                tempor enim vestibulum eget.
+                                Pellentesque tristique dolor eu porttitor interdum.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        </div>
+        <br>
+        <hr>
+        
+        <h1 class="kiddies-h1">
+            G A M E S
+        </h1>
+        <small> Click any card to begin </small>
 
-        <div class="complex-shapes">
+        <section class="games-section">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col">
+                    <div class="card h-100 animate animate-appear">
+                        <!-- <img src="..." class="card-img-top" alt="..."> -->
+                        <div class="card-body">
+                            <h5 class="card-title">Alphabets</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt
+                                eros
+                                ipsum, at tempor enim vestibulum eget.
+                                Pellentesque tristique dolor eu porttitor interdum.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 animate animate-appear delay-p7s">
+                        <!-- <img src="..." class="card-img-top" alt="..."> -->
+                        <div class="card-body">
+                            <h5 class="card-title">Numbers</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt
+                                eros
+                                ipsum, at tempor enim vestibulum eget.
+                                Pellentesque tristique dolor eu porttitor interdum.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 animate animate-appear">
+                        <!-- <img src="..." class="card-img-top" alt="..."> -->
+                        <div class="card-body">
+                            <h5 class="card-title">Shapes</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt
+                                eros
+                                ipsum, at tempor enim vestibulum eget.
+                                Pellentesque tristique dolor eu porttitor interdum.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 animate animate-appear delay-p5s">
+                        <!-- <img src="..." class="card-img-top" alt="..."> -->
+                        <div class="card-body">
+                            <h5 class="card-title">Colors</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt
+                                eros
+                                ipsum, at tempor enim vestibulum eget.
+                                Pellentesque tristique dolor eu porttitor interdum.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 animate animate-appear delay-p7s">
+                        <!-- <img src="..." class="card-img-top" alt="..."> -->
+                        <div class="card-body">
+                            <h5 class="card-title">Animals</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt
+                                eros
+                                ipsum, at
+                                tempor enim vestibulum eget.
+                                Pellentesque tristique dolor eu porttitor interdum.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card h-100 animate animate-appear">
+                        <!-- <img src="..." class="card-img-top" alt="..."> -->
+                        <div class="card-body">
+                            <h5 class="card-title">Fruits</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tincidunt
+                                eros
+                                ipsum, at
+                                tempor enim vestibulum eget.
+                                Pellentesque tristique dolor eu porttitor interdum.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
-        </div>
+    <script>
+        const dayNightSwitch = document.getElementById("day-night-switch");
+        const nav = document.getElementById("navbar");
 
-    </section>
+        dayNightSwitch.addEventListener('change', (e) => {
+            const isNightMode = e.target.checked;
+            isNightMode ? nightMode() : dayMode();
+        });
 
+        function nightMode() {
+            nav.className = "navbar navbar-expand-lg sticky-top navbar-dark bg-dark"
+        }
 
-    <!-- This section is for Colors -->
-    <section class="colors">
+        function dayMode() {
+            nav.className = "navbar navbar-expand-lg sticky-top navbar-light bg-light"
+        }
+    </script>
 
-    </section>
-
-<input type="text" class="txt">
-<button onclick="play();">Play</button>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
     <%- include('partials/footer') %>
