@@ -177,7 +177,7 @@ small {
     animation-fill-mode: forwards;
 }
 
-.animate-alpha {
+.animate-alpha, .animate-number {
     animation-duration: 3s;
     animation-iteration-count: 2;
     animation-fill-mode: forwards;

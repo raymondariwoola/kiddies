@@ -39,6 +39,14 @@ app.get("/alphabets-menu", (req, res) => {
   res.render("alphabets-menu");
 });
 
+app.get("/numbers-menu", (req, res) => {
+  res.render("numbers-menu");
+});
+
+app.get("/shapes", (req,res) => {
+  res.render("shapes");
+})
+
 app.post("/alphabets-menu", (req, res) => {
    type = req.body.upperCase ? "uppercase" 
   : req.body.lowerCase ? "lowercase"
@@ -46,11 +54,30 @@ app.post("/alphabets-menu", (req, res) => {
   res.redirect("/alphabets-menu/alphabets");
 });
 
+app.post("/numbers-menu", (req, res) => {
+  type = req.body.first10 ? "first10" :
+    req.body.first100 ? "first100" :
+    null
+  res.redirect("/numbers-menu/numbers");
+});
+
+
 app.get("/alphabets-menu/alphabets", (req, res) => {
   type === undefined
     ? res.redirect("/alphabets-menu")
     : res.render("alphabets", { type: type });
 });
+
+app.get("/numbers-menu/numbers", (req, res) => {
+  type === undefined ?
+    res.redirect("/numbers-menu") :
+    res.render("numbers", {
+      type: type
+    });
+});
+
+
+
 
 // app.get('/alphabets-menu/alphabets', function (req, res, next) {
 //   console.log('the response will be sent by the next function ...')

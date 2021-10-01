@@ -1,0 +1,32 @@
+<%- include('partials/header') %>
+
+    <div class="header">
+        <div id="svg-target"></div>
+        <div class="text-box alphaNumbox">
+
+        </div>
+    </div>
+
+
+    <script>
+        const targetDiv = document.getElementById('svg-target');
+        const svgNode = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svgNode.setAttributeNS(null, 'viewBox', '0 0 100 100');
+        targetDiv.appendChild(svgNode);
+
+        // create the circle node, set attributes, and append it to the SVG node
+        const circleNode = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+
+        var someVal = 0;
+
+
+
+        /*
+        circleNode.setAttributeNS(null, 'cx', '50');
+        circleNode.setAttributeNS(null, 'cy', '50');
+        circleNode.setAttributeNS(null, 'r', '40');
+        circleNode.setAttributeNS(null, 'fill', 'blue');
+        svgNode.appendChild(circleNode);
+*/
+    </script>
+    <!-- <%- include('partials/footer') %> -->

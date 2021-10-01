@@ -1,5 +1,6 @@
 var synth = window.speechSynthesis;
 var voices = [];
+let currentPage;
 const animations = [
   "animate-zoomIn",
   "animate-backInLeft",
@@ -79,13 +80,14 @@ const alphabetsUpper = [
 const alphabetsLower = alphabetsUpper.map((a) => a.toLowerCase());
 
 const applaud = new Audio("../audio/applause-2.mp3");
-var _alphabet;
+var _alphaNumeric;
 let iteration = 0;
-let trackAlpha = 0;
+let trackAlphaNumeric = 0;
 let alphabets;
 let currentClass;
-let alphabetContainer;
+let AlphaNumericContainer;
 let animateOnPage;
+let numberArray = [];
 
 function randomNum(maxValue) {
   // if maxValue is defined then return random number based on maxValue else set maxValue as 10
@@ -95,37 +97,65 @@ function randomNum(maxValue) {
 function initText() {
   currentClass = animations[randomNum(animations.length)];
   alpType === "uppercase" ?
-    (alphabets = alphabetsUpper[trackAlpha]) :
-    (alphabets = alphabetsLower[trackAlpha]);
+    (alphabets = alphabetsUpper[trackAlphaNumeric]) :
+    (alphabets = alphabetsLower[trackAlphaNumeric]);
   document.querySelector(
-    ".alphabox"
+    ".alphaNumbox"
   ).innerHTML = `<h1 class="animate animate-alpha ${currentClass}" id="alphabet">${alphabets}</h1>`; // Assign the first Alphabet
-  alphabetContainer = document.querySelector("#alphabet");
-  _alphabet = alphabetContainer.innerText; // get the value if current alphabets
-  alphabetContainer.style.color = colors[randomNum(colors.length)];
+  AlphaNumericContainer = document.querySelector("#alphabet");
+  _alphaNumeric = AlphaNumericContainer.innerText; // get the value if current alphabets
+  AlphaNumericContainer.style.color = colors[randomNum(colors.length)];
 }
+
+function initDigit() {
+  currentClass = animations[randomNum(animations.length)];
+  number = numberArray[trackAlphaNumeric];
+  document.querySelector(".alphaNumbox").innerHTML = `<h1 class="animate animate-number ${currentClass}" id="number">${number}</h1>`; // Assign the first Alphabet
+  AlphaNumericContainer = document.querySelector("#number");
+  _alphaNumeric = AlphaNumericContainer.innerText; // get the value if current alphabets
+  AlphaNumericContainer.style.color = colors[randomNum(colors.length)];
+}
+
 
 function addAnimationEventListener() {
   document.addEventListener("animationend", () => {
-    trackAlpha < 26 ? trackAlpha++ : (trackAlpha = 0);
-    trackAlpha < 26 ? initText() : animEnd();
+
+    if (currentPage === "alphabets") {
+      if (trackAlphaNumeric < (alphabetsUpper.length - 1)) { // if within alphabet array length then continue
+        trackAlphaNumeric++;
+        initText();
+      } else {
+        trackAlphaNumeric = 0;
+        animEnd();
+      }
+    } else if (currentPage === "numbers") {
+      if (trackAlphaNumeric < (numberArray.length - 1)) { // If within number array length then continue
+        trackAlphaNumeric++;
+        initDigit();
+      } else {
+        trackAlphaNumeric = 0;
+        animEnd();
+      }
+    }
   });
 
   document.addEventListener("animationstart", () => {
-    trackAlpha < 26 ? speak() : null;
+    if (currentPage === "alphabets") {
+      trackAlphaNumeric < alphabetsUpper.length ? speak() : null;
+    } else if (currentPage === "numbers") {
+      trackAlphaNumeric < numberArray.length ? speak() : null;
+    }
   });
 
   document.addEventListener("animationiteration", () => {
-    alphabetContainer.style.color = colors[randomNum(colors.length)];
+    AlphaNumericContainer.style.color = colors[randomNum(colors.length)];
     speak();
   });
 }
 
 function animEnd() {
-  document.querySelector(
-    ".alphabox"
-  ).innerHTML = `<h1 class="animate animate-alpha gjob">GOOD JOB!</h1> <small> Tap anywhere to restart </small>`;
-  _alphabet = document.querySelector(".gjob").innerText;
+  document.querySelector(".alphaNumbox").innerHTML = `<h1 class="animate animate-alpha gjob">GOOD JOB!</h1> <small> Tap anywhere to restart </small>`;
+  _alphaNumeric = document.querySelector(".gjob").innerText;
   applaud.play();
   speak();
   document.addEventListener("click", () => location.reload());
@@ -154,14 +184,14 @@ function speak() {
     console.error("speechSynthesis.speaking");
     return;
   }
-  if (_alphabet !== "") {
-    var utterThis = new SpeechSynthesisUtterance(_alphabet);
+  if (_alphaNumeric !== "") {
+    var utterThis = new SpeechSynthesisUtterance(_alphaNumeric);
     utterThis.onend = function (event) {
       console.log("SpeechSynthesisUtterance.onend");
       // nextAlphabet(); // calls function at the end of speech
     };
     utterThis.onerror = function (event) {
-      //! check why this gives error when page is reloaded
+      //! check why this gives error when page is manually reloaded  (F5 or ctrl+r)
       console.error("SpeechSynthesisUtterance.onerror");
       console.error(event);
     };
@@ -188,12 +218,30 @@ function speak() {
 
 
 document.addEventListener("DOMContentLoaded", (e) => {
-  window.location.pathname === "/alphabets-menu/alphabets" ? initText() : null;
-  window.location.pathname === "/alphabets-menu/alphabets" ?
-    addAnimationEventListener() :
-    null;
-  animateOnPage =
-    window.location.pathname === "/alphabets-menu/alphabets" ? true : false;
+  if (window.location.pathname === "/alphabets-menu/alphabets") {
+    currentPage = "alphabets";
+    initText();
+    addAnimationEventListener();
+    animateOnPage = true;
+  }
+
+  if (window.location.pathname === "/numbers-menu/numbers") {
+    currentPage = "numbers";
+    let numberCounter = 0;
+    numType === "first10" ?
+      (numberCounter = 9) :
+      numType === "first100" ?
+      (numberCounter = 100) :
+      null;
+
+    for (let numberToArray = 0; numberToArray <= numberCounter; numberToArray++) {
+      numberArray.push(numberToArray);
+    }
+
+    initDigit();
+    addAnimationEventListener();
+    animateOnPage = true;
+  }
 
 });
 
@@ -203,7 +251,7 @@ function assignListener() {
   cards.forEach(card => {
     card.addEventListener('mouseenter', function (e) {
       const word = this.innerText.split('\n')[0];
-      _alphabet = word;
+      _alphaNumeric = word;
       speak();
       //! Check bgChnageOnHover(this, word, false)
     });
@@ -216,7 +264,8 @@ function assignListener() {
 }
 
 
-//!check function bgChnageOnHover(cardTag, x, clearBg) {
+//!check 
+//function bgChnageOnHover(cardTag, x, clearBg) {
 //   x === "Alphabets" ? cardTag.style.backgroundImage = "../images/bg/alphabets-bg.png" : null;
 //   console.log(cardTag)
 //   console.log(x)
@@ -235,7 +284,7 @@ $(document).ready(() => {
     keyboard: false
   });
 
-myModal.toggle();
+  myModal.toggle();
 
 });
 

@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+
+    <main class="main select-alphabet">
+
+
+        <form action="/numbers-menu" method="post">
+            <div class="header">
+                <div class="text-box alphabox card-wrapper">
+                    <div class="alfa-card alphabet-btn" onclick="submitForm('first10');">
+                        <h1>0 - 9</h1>
+                        <input type="hidden" name="first10" id="first10">
+                    </div>
+                    <div class="alfa-card alphabet-btn" onclick="submitForm('first100');">
+                        <h1>0 - 100</h1>
+                        <input type="hidden" name="first100" id="first100">
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </main>
+
+    <script>
+
+        function submitForm(a) {
+            document.getElementById(a).value = true;
+            document.getElementsByTagName("form")[0].submit();
+        }
+
+    </script>
+    <%- include('partials/footer') %>
