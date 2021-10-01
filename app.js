@@ -78,7 +78,6 @@ app.get("/numbers-menu/numbers", (req, res) => {
 
 
 
-
 // app.get('/alphabets-menu/alphabets', function (req, res, next) {
 //   console.log('the response will be sent by the next function ...')
 //   next()
@@ -89,6 +88,10 @@ app.get("/numbers-menu/numbers", (req, res) => {
 // })
 
 
-app.listen(3000, function () {
-    console.log("listening on port 3000");
-})
+app.listen(process.env.PORT || 3000, function () {
+  console.log(
+    "Express server listening on port %d in %s mode",
+    this.address().port,
+    app.settings.env
+  );
+});
