@@ -26,10 +26,11 @@ for (let i = 97; i <= 122; i++) {
   generateAlphaUp.push(element.toUpperCase());
 }
 
+app.get("/", (req,res) => {
+  res.sendFile('views/signin.html', {root: __dirname });
+});
 
-
-
-app.get("/", (req, res) => {
+app.get("/home", (req, res) => {
     res.render("home", { alpha: alphabetsUpper });
 });
 
@@ -77,6 +78,17 @@ app.get("/numbers-menu/numbers", (req, res) => {
 });
 
 
+app.get("/login", (req,res) => {
+  res.sendFile('views/signin.html', {root: __dirname });
+});
+
+app.get("/register", (req,res) => {
+  res.sendFile('views/signup.html', {root: __dirname });
+});
+
+app.get("/settings", (req,res) => {
+  res.render("settings");
+})
 
 // app.get('/alphabets-menu/alphabets', function (req, res, next) {
 //   console.log('the response will be sent by the next function ...')
