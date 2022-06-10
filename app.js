@@ -1,6 +1,6 @@
 const express = require('express');
-const ejs = require('ejs');
-const bodyParser = require('body-parser');
+// const ejs = require('ejs');
+// const bodyParser = require('body-parser');
 // const testFunc = require("./custom.js");
 
 const app = express();
@@ -10,8 +10,8 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // Manually declare Alphabet constants
-const alphabetsUpper =  ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-const alphabetsLower = alphabetsUpper.map((a) => a.toLowerCase());
+const alphabetsUpper =  ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+// const alphabetsLower = alphabetsUpper.map((a) => a.toLowerCase());
 
 // Declare Alphabet constant using CharCode
 /* lowerCase charCode - 97 to 122
