@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // Manually declare Alphabet constants
-const alphabetsUpper =  ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+const alphabetsUpper = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
 // const alphabetsLower = alphabetsUpper.map((a) => a.toLowerCase());
 
 // Declare Alphabet constant using CharCode
