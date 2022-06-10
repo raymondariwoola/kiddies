@@ -81,12 +81,12 @@ const alphabetsLower = alphabetsUpper.map((a) => a.toLowerCase());
 
 const applaud = new Audio("../audio/applause-2.mp3");
 var _alphaNumeric;
-let iteration = 0;
+// let iteration = 0;
 let trackAlphaNumeric = 0;
 let alphabets;
 let currentClass;
 let AlphaNumericContainer;
-let animateOnPage;
+// let animateOnPage;
 let numberArray = [];
 
 function randomNum(maxValue) {
@@ -186,7 +186,7 @@ function speak() {
   }
   if (_alphaNumeric !== "") {
     var utterThis = new SpeechSynthesisUtterance(_alphaNumeric);
-    utterThis.onend = function (event) {
+    utterThis.onend = function () {
       console.log("SpeechSynthesisUtterance.onend");
       // nextAlphabet(); // calls function at the end of speech
     };
@@ -217,7 +217,7 @@ function speak() {
 // }
 
 
-document.addEventListener("DOMContentLoaded", (e) => {
+document.addEventListener("DOMContentLoaded", () => {
   if (window.location.pathname === "/alphabets-menu/alphabets") {
     currentPage = "alphabets";
     initText();
@@ -249,7 +249,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 function assignListener() {
   const cards = document.querySelectorAll('.card');
   cards.forEach(card => {
-    card.addEventListener('mouseenter', function (e) {
+    card.addEventListener('mouseenter', function () {
       const word = this.innerText.split('\n')[0];
       _alphaNumeric = word;
       speak();
@@ -257,7 +257,7 @@ function assignListener() {
     });
   });
   cards.forEach(card => {
-    card.addEventListener('mouseleave', function (e) {
+    card.addEventListener('mouseleave', function () {
       synth.cancel();
     });
   });
@@ -290,7 +290,7 @@ $(document).ready(() => {
 
 
 // Home Page navigation
-function getRoute(route) {
-  window.location.href = route;
-  return false;
-}
+// function getRoute(route) {
+//   window.location.href = route;
+//   return false;
+// }
