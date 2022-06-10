@@ -1,11 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Freckle+Face&family=Libre+Barcode+128+Text&family=Mountains+of+Christmas:wght@400;700&family=Unkempt:wght@400;700&display=swap');
 
-/* font-family: 'Freckle Face', cursive;
-font-family: 'Mountains of Christmas', cursive;
-font-family: 'Unkempt', cursive;
-font-family: 'Libre Barcode 128 Text', cursive; */
-
 
 * {
     margin: 0;
@@ -70,9 +65,6 @@ section.games-section {
     background-position: top;
     position: relative;
     overflow: hidden;
-}
-
-.header {
     font-size: 6rem;
     font-family: "Lato", sans-serif;
     font-weight: 900;
